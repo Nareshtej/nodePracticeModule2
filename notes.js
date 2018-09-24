@@ -20,36 +20,44 @@ module.exports.add = (a, b) => { //we always write logic in function
 
 const fs = require('fs')//This is core node module no need to install 
 var fetchNotes = () => {
-
-};
-
-var saveNotes = (notes) => {};
-var addNote = (title, body) => { //this is anonymous error function // we took 2 arguments in it
-  //console.log('Adding Notes', title, body);
-  var notes = [];
-  var note = {
-    title,
-    body
-  };
-
   try {
     var notesString = fs.readFileSync('notes-data.json');
-    var notes = JSON.parse(notesString);
+    return JSON.parse(notesString);
 
   } catch (e) {
-    
+    return [];
   }
+  
+};
 
-  // var duplicateNotes = notes.filter((note) => {
+var saveNotes = (notes) => {
+  var test = fs.writeFileSync('notes-data.json', JSON.stringify(notes));  
+  console.log(test)
+};
+
+var addNote = (title, body) => { //this is anonymous error function // we took 2 arguments in it
+  //console.log('Adding Notes', title, body);
+  var notes = fetchNotes();
+  var note = {
+    title,
+    body  
+  };
+
+
+
   //   return note.title === title;
+  // var duplicateNotes = notes.filter((note) => {
   // });
 
 
   var duplicateNotes = notes.filter((note) => note.title === title);// This code is valid in es6 and this is same as above few line of code
  
-  if(duplicateNotes === 0) {
+  if(duplicateNotes.length === 0) { // I forgot .length , this error took 2 hours to resolve, Be patiance in analysing the code
     notes.push(note);
-    fs.writeFileSync('notes-data.json', JSON.stringify(notes));  
+    saveNotes(notes);
+    return note;
+  } else {
+    console.log('No data to push')
   }
   
 };
