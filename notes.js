@@ -67,14 +67,27 @@ var getAll = () => {
   console.log('get all notes')  
 };
 
-var read = () => {
+var getNote = (title) => {
     console.log('reading all notes')
 };
 
+var removeNote = (title) => {
+  // fetch notes
+  // filter notes, removing the one with title of argument
+  // save new notes array
+  var notes = fetchNotes();
+  var filteredNotes = notes.filter((note) => note.title !== title);
+  console.log('This is the filtered data', filteredNotes);
+  saveNotes(filteredNotes); 
+
+  return notes.length !== filteredNotes.length; // Here return is a boolean operator
+};
+
 module.exports = {
-  //addNote: addNote //first one is object attribute and second one is value
+  // addNote: addNote //first one is object attribute and second one is value
   
   addNote, //thi s is new feature in es6, This line avoids above line of code 
   getAll,
-  read    //If you wont export then it will show TypeError in terminal
+  getNote,    //If you wont export then it will show TypeError in terminal
+  removeNote
 };

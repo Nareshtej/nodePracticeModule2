@@ -29,7 +29,10 @@ if (command === 'add') {
 } else if (command === 'list') {
   notes.getAll();
 } else if (command === 'remove') {
-    notes.read();
+  var noteremoved = notes.removeNote(argv.title);
+  var message = noteremoved ? 'Note was removed' : 'Note not found'; // This is the ternary operator ( condition(true or false) ? true statement : false statement  
+  console.log(message);
+  
 } else {
     console.log('no command found')
 }
