@@ -1,0 +1,13 @@
+{
+  "name": "test",
+  "version": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "app.js"
+  },
+  "author": "Nareshtej",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "yargs": "^12.0.2"
+  }
+}
