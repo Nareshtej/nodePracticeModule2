@@ -64,10 +64,18 @@ var addNote = (title, body) => { //this is anonymous error function // we took 2
 
 var getAll = () => {
 
-  console.log('get all notes')  
+  console.log('get all notes');
+  return fetchNotes();  
 };
 
 var getNote = (title) => {
+  var notes = fetchNotes();
+  var filteredNotes = notes.filter((note) =>{
+      return note.title === title; //equivalent 1 line code filter((note) => note.title ===title)
+  });
+
+  return filteredNotes[0];
+   
     console.log('reading all notes')
 };
 
@@ -83,11 +91,21 @@ var removeNote = (title) => {
   return notes.length !== filteredNotes.length; // Here return is a boolean operator
 };
 
+var logNote = (note) => {  // Mistake:: Here you have to pass note object not title
+  // Break on this line and use repl to output note
+  // use read command with --title
+
+  console.log('------')
+  console.log(`Title: ${note.title}`);
+  console.log(`Body: ${note.body}`);  
+}
+
 module.exports = {
   // addNote: addNote //first one is object attribute and second one is value
   
   addNote, //thi s is new feature in es6, This line avoids above line of code 
   getAll,
   getNote,    //If you wont export then it will show TypeError in terminal
-  removeNote
+  removeNote,
+  logNote
 };
